@@ -4,6 +4,7 @@ Art Assets
 -SunnyLand Woods By:Ansimuz https://assetstore.unity.com/packages/2d/environments/sunnyland-woods-129708
 
 Sound Assets
-
+-Adventure/Exploration Music Pack By: Fred Patry https://assetstore.unity.com/packages/audio/music/adventure-exploration-music-pack-196816#content
+-FREE Casual Game SFX Pack By:Dustyroom  https://assetstore.unity.com/packages/audio/sound-fx/free-casual-game-sfx-pack-54116
 
 Code References
