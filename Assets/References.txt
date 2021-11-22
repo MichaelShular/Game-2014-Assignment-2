@@ -8,3 +8,4 @@ Sound Assets
 -FREE Casual Game SFX Pack By:Dustyroom  https://assetstore.unity.com/packages/audio/sound-fx/free-casual-game-sfx-pack-54116
 
 Code References
+-Joystick Pack By:Fenerax Studios https://assetstore.unity.com/packages/tools/input-management/joystick-pack-107631

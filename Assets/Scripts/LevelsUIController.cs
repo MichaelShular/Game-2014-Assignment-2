@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameMenuUIController : MonoBehaviour
+public class LevelsUIController : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -17,19 +17,9 @@ public class GameMenuUIController : MonoBehaviour
         
     }
 
-    public void backToMainMenu()
+    public void loadGameMenu()
     {
-        SceneManager.LoadScene("MainMenu");
-    }
-
-    public void levelOne()
-    {
-        SceneManager.LoadScene("Level_1");
-    }
-
-    public void LevelTwo()
-    {
-        SceneManager.LoadScene("Level_2");
+        SceneManager.LoadScene("GameMenu");
 
     }
 }
