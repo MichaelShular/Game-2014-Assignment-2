@@ -22,6 +22,7 @@ public class DeathPlane : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             collision.transform.position = playerSpawn.position;
+            GameObject.Find("GameController").GetComponent<GameStateController>().incrementOrDecrementPlayerLives(-1);
         }
     }
 }
