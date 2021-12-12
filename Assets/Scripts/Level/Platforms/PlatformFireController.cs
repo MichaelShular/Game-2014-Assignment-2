@@ -49,7 +49,6 @@ public class PlatformFireController : MonoBehaviour
             {
                 case Directions.Up:
                     updateDirectionOfFire(Vector3.right, Directions.Right);
-
                     break;
                 case Directions.Right:
                     updateDirectionOfFire(Vector3.down, Directions.Down);
