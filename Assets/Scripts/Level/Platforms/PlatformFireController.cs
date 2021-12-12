@@ -80,7 +80,7 @@ public class PlatformFireController : MonoBehaviour
     }
     private bool PlatformBelowFire(Vector3 targetPosition)
     {
-        if (Physics2D.OverlapCircle(targetPosition, 0.3f, Platform) != null)
+        if (Physics2D.OverlapCircle(targetPosition, 0.4f, Platform) != null)
         {
             return true;
         }
@@ -99,5 +99,5 @@ public class PlatformFireController : MonoBehaviour
         Down,
         Left
     }
-
+   
 }

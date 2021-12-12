@@ -18,9 +18,6 @@ public class AcornCollider : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-
-        Debug.Log("Grounded");
         GetComponentInParent<AcornController>().setIsFalling(false);
-
     }
 }
