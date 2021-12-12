@@ -7,14 +7,21 @@ using TMPro;
 
 public class GameStateController : MonoBehaviour
 {
-    [SerializeField] int numberOfPlayerLifes;
-    [SerializeField] Canvas gameStateCanvas;
-    [SerializeField] TextMeshProUGUI winOrLoseText;
+    [Header("Game State UI")]
+    [SerializeField] private int numberOfPlayerLifes;
+    [SerializeField] private Canvas gameStateCanvas;
+    [SerializeField] private TextMeshProUGUI winOrLoseText;
+
+    [Header("Player Spawns")]
+    [SerializeField] private Transform startSpawn;
+    private Transform currentSpawn;
+
 
     // Start is called before the first frame update
     void Start()
     {
         Time.timeScale = 1;
+        currentSpawn = startSpawn;
     }
 
     // Update is called once per frame
@@ -30,6 +37,16 @@ public class GameStateController : MonoBehaviour
     public void incrementOrDecrementPlayerLives(int amount)
     {
         numberOfPlayerLifes += amount;
+    }
+
+    public void triggerPlayerSpawn(Collider2D collision)
+    {
+        collision.transform.position = currentSpawn.position;
+    }
+
+    public void updatePlayerSpawnpoint(Transform updatedPoint)
+    {
+        currentSpawn = updatedPoint;
     }
 
 }
