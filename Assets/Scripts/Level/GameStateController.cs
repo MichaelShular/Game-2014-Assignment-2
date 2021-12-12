@@ -16,12 +16,19 @@ public class GameStateController : MonoBehaviour
     [SerializeField] private Transform startSpawn;
     private Transform currentSpawn;
 
+    [Header("Eagle Spawn")]
+    [SerializeField] private GameObject eagle;
+    private GameObject player;
+    [SerializeField] private float minSpawnEagleTimer;
+    [SerializeField] private float maxSpawnEagleTimer;
 
     // Start is called before the first frame update
     void Start()
     {
         Time.timeScale = 1;
         currentSpawn = startSpawn;
+        player = GameObject.Find("Player");
+        StartCoroutine(spawnEagel());
     }
 
     // Update is called once per frame
@@ -47,6 +54,19 @@ public class GameStateController : MonoBehaviour
     public void updatePlayerSpawnpoint(Transform updatedPoint)
     {
         currentSpawn = updatedPoint;
+    }
+
+    IEnumerator spawnEagel()
+    {
+        yield return new WaitForSeconds(randomTimerForEagel());
+        GameObject temp = Instantiate(eagle);
+        temp.transform.position = new Vector3(player.transform.position.x + 4, player.transform.position.y + 4, 0.0f); 
+        StartCoroutine(spawnEagel());
+    }
+
+    private float randomTimerForEagel()
+    {
+        return Random.Range(minSpawnEagleTimer, maxSpawnEagleTimer);
     }
 
 }
