@@ -1,3 +1,7 @@
+//Michael Shular 101273089
+//LevelsUIController
+//12/12/2021
+//Summary: Controls the ui button function in the level scene
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,22 +11,10 @@ public class LevelsUIController : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] Canvas pauseCanvas;
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void loadGameMenu()
     {
         SceneManager.LoadScene("GameMenu");
     }
-
     public void UnpauseAndPauseGame()
     {
         if (Time.timeScale == 1)
@@ -35,7 +27,5 @@ public class LevelsUIController : MonoBehaviour
             Time.timeScale = 1;
             pauseCanvas.enabled = false;
         }
-
     }
-
 }

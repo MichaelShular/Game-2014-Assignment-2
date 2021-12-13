@@ -1,7 +1,10 @@
+//Michael Shular 101273089
+//CheckPointController
+//12/12/2021
+//Summary: Controls what check point a player will spawn at.
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class CheckPointController : MonoBehaviour
 {
     [SerializeField] private Transform newSpawnPoint;
@@ -12,13 +15,6 @@ public class CheckPointController : MonoBehaviour
     {
         gameController = GameObject.Find("GameController").GetComponent<GameStateController>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
 

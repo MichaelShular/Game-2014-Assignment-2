@@ -1,8 +1,11 @@
+//Michael Shular 101273089
+//PlatformFireController
+//12/12/2021
+//Summary: Controls how the fire on the chasing platform moves around the platform.
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-
 public class PlatformFireController : MonoBehaviour
 {
     [Header("Movement")]

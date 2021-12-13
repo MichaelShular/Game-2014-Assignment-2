@@ -1,3 +1,8 @@
+//Michael Shular 101273089
+//GoalTrigger
+//12/12/2021
+//Summary: Controls goal state, whether the player has delayed the squirrel enough.
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,14 +15,8 @@ public class GoalTrigger : MonoBehaviour
     void Start()
     {
         gameController = GameObject.Find("GameController").GetComponent<GameStateController>();
+        StartCoroutine(timerBeforeWin());
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Squirrel"))
@@ -33,7 +32,6 @@ public class GoalTrigger : MonoBehaviour
            
         }
     }
-
     IEnumerator timerBeforeWin()
     {
         yield return new WaitForSeconds(90);

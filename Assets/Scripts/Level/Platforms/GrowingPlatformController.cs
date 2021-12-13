@@ -1,7 +1,10 @@
+//Michael Shular 101273089
+//GrowingPlatformContoller
+//12/12/2021
+//Summary: Controls what how much the platform will grow, speed of movement, and spawns the vines.
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class GrowingPlatformController : MonoBehaviour
 {
     [Header("Movement")]
@@ -23,7 +26,6 @@ public class GrowingPlatformController : MonoBehaviour
         targetLocation = growLocation.transform.position;
         isGrowing = true;
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -31,9 +33,7 @@ public class GrowingPlatformController : MonoBehaviour
         {
             StartCoroutine(grow());
         }
-
     }
-
     IEnumerator grow()
     {
         int amountOfVineSpawns = Mathf.RoundToInt(Vector3.Distance(targetLocation, transform.position));
@@ -73,7 +73,6 @@ public class GrowingPlatformController : MonoBehaviour
                 currentVineSpawnTwo += Vector3.down;
             }
         }
-
         
         while ((targetLocation - transform.position).sqrMagnitude > Mathf.Epsilon)
         {

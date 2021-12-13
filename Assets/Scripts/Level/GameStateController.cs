@@ -1,10 +1,13 @@
+//Michael Shular 101273089
+//GameStateController
+//12/12/2021
+//Summary: Controls what state the game is in, player's heath and ammo, players UI information and spawning of eagle.
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
-
-
 public class GameStateController : MonoBehaviour
 {
     [Header("Game State UI")]

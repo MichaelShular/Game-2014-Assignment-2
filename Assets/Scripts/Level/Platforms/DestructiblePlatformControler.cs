@@ -1,3 +1,7 @@
+//Michael Shular 101273089
+//DestructiblePlatformController
+//12/12/2021
+//Summary: Controls the despawning and respawing of the platform.
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,19 +10,6 @@ public class DestructiblePlatformControler : MonoBehaviour
 {
     [SerializeField] private float timeBeforeRemoveFromScene;
     [SerializeField] private float timeBeforeRespawn;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         StartCoroutine(TimerForDestoryingObject());
@@ -35,7 +26,6 @@ public class DestructiblePlatformControler : MonoBehaviour
         }
         StartCoroutine(TimerRespawningPlatform());
     }
-
     IEnumerator TimerRespawningPlatform()
     {
         yield return new WaitForSeconds(timeBeforeRespawn);

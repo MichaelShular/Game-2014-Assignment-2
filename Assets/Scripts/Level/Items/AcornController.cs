@@ -1,3 +1,8 @@
+//Michael Shular 101273089
+//AcornController
+//12/12/2021
+//Summary: Controls what happens to player when a acron touch them and despawn the acorn also.
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

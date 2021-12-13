@@ -1,7 +1,10 @@
+//Michael Shular 101273089
+//PlayerBullet
+//12/12/2021
+//Summary: Controls how bullet will move, its collision and despawn.
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class PlayerBullet : MonoBehaviour
 {
     [SerializeField] private float speed;
