@@ -74,7 +74,7 @@ public class GrowingPlatformController : MonoBehaviour
             }
         }
 
-        isGrowing = true;
+        
         while ((targetLocation - transform.position).sqrMagnitude > Mathf.Epsilon)
         {
             float step = speed * Time.deltaTime;

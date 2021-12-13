@@ -90,4 +90,9 @@ public class GameStateController : MonoBehaviour
     {
         amountOfAmmoUI.text = text;
     }
+
+    public int getAmmo()
+    {
+        return amountOfAmmo;
+    }
 }
