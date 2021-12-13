@@ -17,6 +17,7 @@ public class PlatformFireController : MonoBehaviour
     private Directions currentDirection;
     private bool changedSides;
 
+    private GameStateController gameController;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +26,7 @@ public class PlatformFireController : MonoBehaviour
         targetLocationChange = Vector3.right;
         currentDirection = Directions.Right;
         changedSides = false;
+        gameController = GameObject.Find("GameController").GetComponent<GameStateController>();
     }
 
     // Update is called once per frame
@@ -91,6 +93,15 @@ public class PlatformFireController : MonoBehaviour
         targetLocationChange = newTargetLoctionChange;
         currentDirection = setFiresNewDirection;
         transform.Rotate(0.0f, 0.0f, -90.0f, Space.Self);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            gameController.triggerPlayerSpawn(collision);
+            gameController.incrementOrDecrementPlayerLives(-1);
+        }
     }
     public enum Directions
     {

@@ -11,6 +11,9 @@ public class GameStateController : MonoBehaviour
     [SerializeField] private int numberOfPlayerLifes;
     [SerializeField] private Canvas gameStateCanvas;
     [SerializeField] private TextMeshProUGUI winOrLoseText;
+    [SerializeField] private TextMeshProUGUI amountOfLives;
+    [SerializeField] private TextMeshProUGUI amountOfAmmoUI;
+    private int amountOfAmmo;
 
     [Header("Player Spawns")]
     [SerializeField] private Transform startSpawn;
@@ -29,6 +32,9 @@ public class GameStateController : MonoBehaviour
         currentSpawn = startSpawn;
         player = GameObject.Find("Player");
         StartCoroutine(spawnEagel());
+        amountOfLives.text = numberOfPlayerLifes.ToString();
+        amountOfAmmo = 0;
+        updateAmmoUI(amountOfAmmo.ToString());
     }
 
     // Update is called once per frame
@@ -42,6 +48,7 @@ public class GameStateController : MonoBehaviour
     public void incrementOrDecrementPlayerLives(int amount)
     {
         numberOfPlayerLifes += amount;
+        amountOfLives.text = numberOfPlayerLifes.ToString();
     }
 
     public void triggerPlayerSpawn(Collider2D collision)
@@ -72,5 +79,15 @@ public class GameStateController : MonoBehaviour
         Time.timeScale = 0;
         gameStateCanvas.enabled = true;
         winOrLoseText.text = endGameText;
+    }
+
+    public void incrementOrDecrementAmmo(int amount)
+    {
+        amountOfAmmo += amount;
+        updateAmmoUI(amountOfAmmo.ToString());
+    }
+    public void updateAmmoUI(string text)
+    {
+        amountOfAmmoUI.text = text;
     }
 }

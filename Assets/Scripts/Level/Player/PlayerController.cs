@@ -16,9 +16,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform groundOrigin;
     [SerializeField] private float groundRadius;
     [SerializeField] private LayerMask groundLayerMask;
+
+
     void Start()
     {
         playerRigidbody = GetComponent<Rigidbody2D>();
+        
     }
     void FixedUpdate()
     {

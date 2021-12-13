@@ -26,7 +26,8 @@ public class AcornController : MonoBehaviour
     {
         if (collision.CompareTag("Player") && !isFalling)
         {
-            Debug.Log("Hit");
+            gameController.incrementOrDecrementAmmo(1);
+            Destroy(this.gameObject);
         }
         if (collision.CompareTag("Player") && isFalling)
         {
