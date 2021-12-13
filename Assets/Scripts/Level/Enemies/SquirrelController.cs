@@ -1,6 +1,6 @@
 //Michael Shular 101273089
 //SquirrelController
-//12/12/2021
+//12/13/2021
 //Summary: Controls movement of squirrel, flip local scale and stun state;
 
 using System.Collections;
@@ -10,6 +10,7 @@ using UnityEngine;
 public class SquirrelController : MonoBehaviour
 {
     private Rigidbody2D enemyRigidbody;
+    private Animator animatorController;
     [Header("Movement")]
     [SerializeField] private float runForce;
     [SerializeField] private LayerMask groundLayerMask;
@@ -27,6 +28,7 @@ public class SquirrelController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        animatorController = GetComponent<Animator>();
         enemyRigidbody = GetComponent<Rigidbody2D>();
         isJumping = false;
         isStunned = false;
@@ -42,11 +44,13 @@ public class SquirrelController : MonoBehaviour
     }
     private void movement()
     {
+        animatorController.SetInteger("AnimationState", 0);
         enemyRigidbody.AddForce(Vector2.left * runForce * transform.localScale.x);
         enemyRigidbody.velocity *= 0.90f;
     }
     public void jumpForce(Vector2 forceamount)
     {
+        animatorController.SetInteger("AnimationState", 1);
         enemyRigidbody.AddForce(forceamount, ForceMode2D.Impulse);
     }
 
@@ -67,6 +71,8 @@ public class SquirrelController : MonoBehaviour
     }
     IEnumerator unstunTimer()
     {
+        //StunnedState
+        animatorController.SetInteger("AnimationState", 2);
         yield return new WaitForSeconds(stunTime);
         isStunned = false;
     }
