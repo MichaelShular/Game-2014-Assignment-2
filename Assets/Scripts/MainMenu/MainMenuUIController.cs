@@ -1,23 +1,16 @@
+//Michael Shular 101273089
+//MainMenuUIController
+//12/12/2021
+//Summary: Controls menu buttons
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
 public class MainMenuUIController : MonoBehaviour
 {
     [SerializeField] private Canvas instructionsUI; 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+   
     public void changeToGameMenu()
     {
         SceneManager.LoadScene("GameMenu");
@@ -25,7 +18,7 @@ public class MainMenuUIController : MonoBehaviour
 
     public void openInstructions()
     {
-        instructionsUI.enabled = !instructionsUI;
+        instructionsUI.enabled = !instructionsUI.enabled;
     }
     public void quitGame()
     {

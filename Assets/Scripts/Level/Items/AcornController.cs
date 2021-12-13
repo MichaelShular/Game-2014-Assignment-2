@@ -32,6 +32,7 @@ public class AcornController : MonoBehaviour
         if (collision.CompareTag("Player") && isFalling)
         {
             gameController.triggerPlayerSpawn(collision);
+            gameController.incrementOrDecrementPlayerLives(-1);
         }
     }
     public void setIsFalling(bool a)

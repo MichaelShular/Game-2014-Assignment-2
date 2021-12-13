@@ -1,3 +1,8 @@
+//Michael Shular 101273089
+//EagleController
+//12/12/2021
+//Summary: Control aspects of the enemy eagle. Such as movement and when to drop an acorn
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,10 +39,8 @@ public class EagleController : MonoBehaviour
             hasDroppedAcorn = true;
             GameObject temp = Instantiate(acorn);
             temp.transform.position = transform.position;
-        }
-            
+        }     
     }
-
     private void FixedUpdate()
     {
         transform.position += new Vector3(speed * direction, 0.0f, 0.0f);

@@ -1,3 +1,9 @@
+//Michael Shular 101273089
+//PlayerController 
+//12/12/2021
+//Summary: Controls aspects of the player. Such as movement, when player is touch the ground, 
+// when player can jump or shoot, animation, and UI button presses. 
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
