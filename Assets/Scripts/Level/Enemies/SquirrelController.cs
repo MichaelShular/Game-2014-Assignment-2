@@ -15,6 +15,8 @@ public class SquirrelController : MonoBehaviour
     [SerializeField] private float groundRadius;
     public bool isGrounded;
     public Transform lookAheadPointWall;
+    private bool isStunned;
+    [SerializeField] private float stunTime;
 
 
     // Start is called before the first frame update
@@ -22,14 +24,19 @@ public class SquirrelController : MonoBehaviour
     {
         enemyRigidbody = GetComponent<Rigidbody2D>();
         isJumping = false;
+        isStunned = false;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        
+
         //lookAhead();
-        movement();
+        if (!isStunned)
+        {
+            movement();
+        }
+        
         //CheckIfGrounded();
     }
 
@@ -101,5 +108,17 @@ public class SquirrelController : MonoBehaviour
         Gizmos.color = Color.green;
         //visualizating radius around  groundOrigin
         Gizmos.DrawWireSphere(groundOrigin.position, groundRadius);
+    }
+
+    public void gotStunned()
+    {
+        isStunned = true;
+        StartCoroutine(unstunTimer());
+    }
+
+    IEnumerator unstunTimer()
+    {
+        yield return new WaitForSeconds(stunTime);
+        isStunned = false;
     }
 }
