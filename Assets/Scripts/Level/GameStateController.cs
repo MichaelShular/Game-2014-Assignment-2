@@ -36,9 +36,7 @@ public class GameStateController : MonoBehaviour
     {
         if(numberOfPlayerLifes <= 0)
         {
-            Time.timeScale = 0;
-            gameStateCanvas.enabled = true;
-            winOrLoseText.text = "You Lost"; 
+            endGame("You Lost");
         }
     }
     public void incrementOrDecrementPlayerLives(int amount)
@@ -69,4 +67,10 @@ public class GameStateController : MonoBehaviour
         return Random.Range(minSpawnEagleTimer, maxSpawnEagleTimer);
     }
 
+    public void endGame(string endGameText)
+    {
+        Time.timeScale = 0;
+        gameStateCanvas.enabled = true;
+        winOrLoseText.text = endGameText;
+    }
 }

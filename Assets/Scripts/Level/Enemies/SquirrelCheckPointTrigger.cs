@@ -5,6 +5,11 @@ using UnityEngine;
 public class SquirrelCheckPointTrigger : MonoBehaviour
 {
     [SerializeField] private Vector2 jumpForceAmount;
+    [Range(-1, 1)]
+    [SerializeField] private int Direction;
+
+    [SerializeField] private SquirrelState stateForTrigger;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,10 +23,30 @@ public class SquirrelCheckPointTrigger : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
-        if (collision.CompareTag("Squirrel"))
+        switch (stateForTrigger)
         {
-            collision.GetComponent<SquirrelController>().jumpForce(jumpForceAmount);
+            case SquirrelState.Flip:
+                if (collision.CompareTag("Squirrel"))
+                {
+                    collision.GetComponent<SquirrelController>().Flip(Direction);
+                }
+                break;
+            case SquirrelState.Jump:
+                if (collision.CompareTag("Squirrel"))
+                {
+                    collision.GetComponent<SquirrelController>().jumpForce(jumpForceAmount);
+                }
+                break;
+            default:
+                break;
         }
+        
     }
+
+    public enum SquirrelState
+    {
+        Flip,
+        Jump
+    }
+
 }

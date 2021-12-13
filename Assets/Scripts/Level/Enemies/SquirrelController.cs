@@ -83,6 +83,11 @@ public class SquirrelController : MonoBehaviour
     {
         enemyRigidbody.AddForce(forceamount, ForceMode2D.Impulse);
     }
+
+    public void Flip(int a)
+    {
+        transform.localScale = new Vector3(a, transform.localScale.y, transform.localScale.z);
+    }
     //private void CheckIfGrounded()
     //{
     //    RaycastHit2D hit = Physics2D.CircleCast(groundOrigin.position, groundRadius, Vector2.down, groundRadius, groundLayerMask);
