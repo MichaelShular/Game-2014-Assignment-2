@@ -1,6 +1,6 @@
 //Michael Shular 101273089
 //PlatformFireController
-//12/12/2021
+//12/13/2021
 //Summary: Controls how the fire on the chasing platform moves around the platform.
 
 using System.Collections;
@@ -104,6 +104,8 @@ public class PlatformFireController : MonoBehaviour
         {
             gameController.triggerPlayerSpawn(collision);
             gameController.incrementOrDecrementPlayerLives(-1);
+            collision.GetComponent<PlayerController>().hurtState();
+
         }
     }
     public enum Directions

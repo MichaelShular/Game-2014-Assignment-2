@@ -1,6 +1,6 @@
 //Michael Shular 101273089
 //GameStateController
-//12/12/2021
+//12/13/2021
 //Summary: Controls what state the game is in, player's heath and ammo, players UI information and spawning of eagle.
 
 using System.Collections;
@@ -56,7 +56,7 @@ public class GameStateController : MonoBehaviour
 
     public void triggerPlayerSpawn(Collider2D collision)
     {
-        collision.transform.position = currentSpawn.position;
+        StartCoroutine(delayPlayerSpawn(collision));
     }
 
     public void updatePlayerSpawnpoint(Transform updatedPoint)
@@ -97,5 +97,11 @@ public class GameStateController : MonoBehaviour
     public int getAmmo()
     {
         return amountOfAmmo;
+    }
+
+    IEnumerator delayPlayerSpawn(Collider2D collision)
+    {
+        yield return new WaitForSeconds(player.GetComponent<PlayerController>().hurtTimer);
+        collision.transform.position = currentSpawn.position;
     }
 }

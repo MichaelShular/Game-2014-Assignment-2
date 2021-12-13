@@ -1,6 +1,6 @@
 //Michael Shular 101273089
 //DeathPlane
-//12/12/2021
+//12/13/2021
 //Summary: If Player collides with the plane it will respawn the at the last checkpoint
 using System.Collections;
 using System.Collections.Generic;
@@ -19,6 +19,7 @@ public class DeathPlane : MonoBehaviour
         {
             gameController.triggerPlayerSpawn(collision);
             gameController.incrementOrDecrementPlayerLives(-1);
+            collision.GetComponent<PlayerController>().hurtState();
         }
     }
 }

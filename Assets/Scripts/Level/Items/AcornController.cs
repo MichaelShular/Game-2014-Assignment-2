@@ -1,6 +1,6 @@
 //Michael Shular 101273089
 //AcornController
-//12/12/2021
+//12/13/2021
 //Summary: Controls what happens to player when a acron touch them and despawn the acorn also.
 
 using System.Collections;
@@ -30,12 +30,13 @@ public class AcornController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") && !isFalling)
-        {
+        {   
             gameController.incrementOrDecrementAmmo(1);
             Destroy(this.gameObject);
         }
         if (collision.CompareTag("Player") && isFalling)
         {
+            collision.GetComponent<PlayerController>().hurtState();
             gameController.triggerPlayerSpawn(collision);
             gameController.incrementOrDecrementPlayerLives(-1);
         }

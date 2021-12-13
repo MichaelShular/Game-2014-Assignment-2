@@ -12,13 +12,13 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D playerRigidbody;
+    private Animator animatorController;
     [Header("Control Forces")]
     [SerializeField] private float horizontalForce;
     [SerializeField] private float verticalForce;
     [Range(0.1f, 0.9f)]
     [SerializeField] private float airControlFactor;
-    private float jumpButton;
-   
+
     [Header("Grounded Settings")]
     private bool isGrounded;
     [SerializeField] private Transform groundOrigin;
@@ -29,34 +29,53 @@ public class PlayerController : MonoBehaviour
     [Header("Bullet")]
     [SerializeField] private GameObject playerBullet;
 
-    [Header("Input")]
+    [Header("UI Input")]
     [SerializeField] private Joystick joystick;
     [Range(0.01f, 1.0f)]
     [SerializeField] private float sensativity;
-    [Header("Crank")]
+    private float jumpButton;
     public bool isTouchingCrank;
     public bool pushedCrank;
+
     [Header("Background")]
     [SerializeField] private GameObject background;
+
+    [Header("HurtAnimation")]
+    public float hurtTimer;
+    [SerializeField] private float hurtForce;
+    private bool takenDamage;
     void Start()
     {
         playerRigidbody = GetComponent<Rigidbody2D>();
+        animatorController = GetComponent<Animator>();
         gameController = GameObject.Find("GameController").GetComponent<GameStateController>();
         isTouchingCrank = false;
         pushedCrank = false;
+        takenDamage = false;
     }
     void FixedUpdate()
     {
-        Movement();
-        CheckIfGrounded();
-    } 
+        if (!takenDamage)
+        {
+            Movement();
+            CheckIfGrounded();
+        }
+    }
     private void Movement()
     {
         float x = ((Input.GetAxisRaw("Horizontal")) + joystick.Horizontal) * sensativity;
         if (x != 0)
         {
             x = FlipAnimation(x);
+            //RunState
+            animatorController.SetInteger("AnimationState", (int)PlayerAnimationStates.RUN);
         }
+        else
+        {
+            //IdleState
+            animatorController.SetInteger("AnimationState", (int)PlayerAnimationStates.IDLE);
+        }
+
         if (isGrounded)
         {
             float jump = Input.GetAxisRaw("Jump") + jumpButton;
@@ -72,6 +91,8 @@ public class PlayerController : MonoBehaviour
         }
         else //Air control
         {
+            //JumpState
+            animatorController.SetInteger("AnimationState", (int)PlayerAnimationStates.JUMP);
             if (x != 0)
             {
                 movementCalulation(x, 0, airControlFactor);
@@ -113,7 +134,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             background.transform.localScale = new Vector3(1.0f, 1.0f);
-        }    
+        }
     }
     private void OnDrawGizmos()
     {
@@ -137,12 +158,27 @@ public class PlayerController : MonoBehaviour
     {
         //jumpButton = 3;
     }
-
     public void growCrank()
     {
         if (isTouchingCrank)
         {
             pushedCrank = true;
         }
+    }
+
+    public void hurtState()
+    {
+        StartCoroutine(startHurtState());
+    }
+
+    IEnumerator startHurtState()
+    {
+        takenDamage = true;
+        animatorController.SetInteger("AnimationState", (int)PlayerAnimationStates.HURT);
+        playerRigidbody.AddForce(Vector2.up * hurtForce, ForceMode2D.Impulse);
+        GetComponent<CapsuleCollider2D>().enabled = false;
+        yield return new WaitForSeconds(hurtTimer);
+        GetComponent<CapsuleCollider2D>().enabled = true;
+        takenDamage = false;
     }
 }
