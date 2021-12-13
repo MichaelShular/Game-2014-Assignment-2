@@ -1,12 +1,13 @@
 //Michael Shular 101273089
 //PlayerController 
-//12/12/2021
+//12/13/2021
 //Summary: Controls aspects of the player. Such as movement, when player is touch the ground, 
 // when player can jump or shoot, animation, and UI button presses. 
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -28,9 +29,15 @@ public class PlayerController : MonoBehaviour
     [Header("Bullet")]
     [SerializeField] private GameObject playerBullet;
 
+    [Header("Input")]
+    [SerializeField] private Joystick joystick;
+    [Range(0.01f, 1.0f)]
+    [SerializeField] private float sensativity;
+    [Header("Crank")]
     public bool isTouchingCrank;
     public bool pushedCrank;
-
+    [Header("Background")]
+    [SerializeField] private GameObject background;
     void Start()
     {
         playerRigidbody = GetComponent<Rigidbody2D>();
@@ -45,7 +52,7 @@ public class PlayerController : MonoBehaviour
     } 
     private void Movement()
     {
-        float x = (Input.GetAxisRaw("Horizontal")) ;
+        float x = ((Input.GetAxisRaw("Horizontal")) + joystick.Horizontal) * sensativity;
         if (x != 0)
         {
             x = FlipAnimation(x);
@@ -53,6 +60,13 @@ public class PlayerController : MonoBehaviour
         if (isGrounded)
         {
             float jump = Input.GetAxisRaw("Jump") + jumpButton;
+
+            // Touch Input
+            Vector2 worldTouch = new Vector2();
+            foreach (var touch in Input.touches)
+            {
+                worldTouch = Camera.main.ScreenToWorldPoint(touch.position);
+            }
             movementCalulation(x, jump, 1);
             playerRigidbody.velocity *= 0.99f; // scaling / stopping hack
         }
@@ -87,7 +101,19 @@ public class PlayerController : MonoBehaviour
     {
         x = (x > 0) ? 1 : -1;
         transform.localScale = new Vector3(x, 1.0f);
+        settingBackgroundLocalScale(x);
         return x;
+    }
+    private void settingBackgroundLocalScale(float x)
+    {
+        if (x < 0)
+        {
+            background.transform.localScale = new Vector3(-1.0f, 1.0f);
+        }
+        else
+        {
+            background.transform.localScale = new Vector3(1.0f, 1.0f);
+        }    
     }
     private void OnDrawGizmos()
     {
