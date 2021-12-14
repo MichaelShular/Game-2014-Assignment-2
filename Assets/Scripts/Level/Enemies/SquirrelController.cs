@@ -1,7 +1,7 @@
 //Michael Shular 101273089
 //SquirrelController
 //12/13/2021
-//Summary: Controls movement of squirrel, flip local scale and stun state;
+//Summary: Controls movement of squirrel, flip local scale and stun state
 
 using System.Collections;
 using System.Collections.Generic;
@@ -13,7 +13,7 @@ public class SquirrelController : MonoBehaviour
     private Animator animatorController;
     [Header("Movement")]
     [SerializeField] private float runForce;
-    [SerializeField] private LayerMask groundLayerMask;
+    //[SerializeField] private LayerMask groundLayerMask;
     public Transform lookAheadPointGround;
     public bool isGroundAhead;
     public bool isJumping;
@@ -23,6 +23,8 @@ public class SquirrelController : MonoBehaviour
     public Transform lookAheadPointWall;
     private bool isStunned;
     [SerializeField] private float stunTime;
+    [Header("StunAnimation")]
+    [SerializeField] private GameObject stunAnimation;
 
 
     // Start is called before the first frame update
@@ -72,8 +74,10 @@ public class SquirrelController : MonoBehaviour
     IEnumerator unstunTimer()
     {
         //StunnedState
+        stunAnimation.SetActive(true);
         animatorController.SetInteger("AnimationState", 2);
         yield return new WaitForSeconds(stunTime);
         isStunned = false;
+        stunAnimation.SetActive(false);
     }
 }

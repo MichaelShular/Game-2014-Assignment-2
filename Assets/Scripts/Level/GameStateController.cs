@@ -28,6 +28,8 @@ public class GameStateController : MonoBehaviour
     [SerializeField] private float minSpawnEagleTimer;
     [SerializeField] private float maxSpawnEagleTimer;
 
+    private int totalPoints;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +38,7 @@ public class GameStateController : MonoBehaviour
         player = GameObject.Find("Player");
         StartCoroutine(spawnEagel());
         amountOfLives.text = numberOfPlayerLifes.ToString();
-        amountOfAmmo = 0;
+        amountOfAmmo = totalPoints = 0;
         updateAmmoUI(amountOfAmmo.ToString());
     }
 
@@ -59,6 +61,10 @@ public class GameStateController : MonoBehaviour
         StartCoroutine(delayPlayerSpawn(collision));
     }
 
+    public void triggerPlayerSpawn(Collision2D collision)
+    {
+        StartCoroutine(delayPlayerSpawn(collision));
+    }
     public void updatePlayerSpawnpoint(Transform updatedPoint)
     {
         currentSpawn = updatedPoint;
@@ -98,8 +104,21 @@ public class GameStateController : MonoBehaviour
     {
         return amountOfAmmo;
     }
-
+    public void addedToTotalPoints(int a)
+    {
+        totalPoints += a;
+    }
+    public int getTotalPoints()
+    {
+        return totalPoints;
+    }
     IEnumerator delayPlayerSpawn(Collider2D collision)
+    {
+        yield return new WaitForSeconds(player.GetComponent<PlayerController>().hurtTimer);
+        collision.transform.position = currentSpawn.position;
+    }
+
+    IEnumerator delayPlayerSpawn(Collision2D collision)
     {
         yield return new WaitForSeconds(player.GetComponent<PlayerController>().hurtTimer);
         collision.transform.position = currentSpawn.position;

@@ -11,11 +11,15 @@ public class GoalTrigger : MonoBehaviour
 {
     private GameStateController gameController;
     private bool winOrLose;
+    [Header("Points/Win")]
+    [SerializeField] float delayBeforWinAmount;
+    [SerializeField] float delayBetweenBonusPoints;
     // Start is called before the first frame update
     void Start()
     {
         gameController = GameObject.Find("GameController").GetComponent<GameStateController>();
         StartCoroutine(timerBeforeWin());
+        winOrLose = false;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -23,7 +27,7 @@ public class GoalTrigger : MonoBehaviour
         {
             if (winOrLose)
             {
-                gameController.GetComponent<GameStateController>().endGame("You Win you delayed the squirrel");
+                gameController.GetComponent<GameStateController>().endGame("You Win you delayed the squirrel \nBonus Points: " + gameController.getTotalPoints().ToString());
             }
             else
             {
@@ -34,6 +38,16 @@ public class GoalTrigger : MonoBehaviour
     }
     IEnumerator timerBeforeWin()
     {
-        yield return new WaitForSeconds(90);
+        yield return new WaitForSeconds(delayBeforWinAmount);
+        gameController.addedToTotalPoints(100);
+        winOrLose = true;
+        StartCoroutine(bonusPointsForExtraDelay());
     }  
-}
+
+    IEnumerator bonusPointsForExtraDelay()
+    {
+        yield return new WaitForSeconds(delayBetweenBonusPoints);
+        gameController.addedToTotalPoints(20);
+        StartCoroutine(bonusPointsForExtraDelay());
+    }
+ }
