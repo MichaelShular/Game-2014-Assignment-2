@@ -8,20 +8,28 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class GameMenuUIController : MonoBehaviour
 {
+    private SFXController sfx;
+
     private void Start()
     {
         if (GameObject.Find("BMGManager") != null)
         {
             GameObject.Find("BMGManager").GetComponent<BGMController>().PlayTrack(TrackID.GameMenu);
         }
+        if (GameObject.Find("SFXManager") != null)
+        {
+            sfx = GameObject.Find("SFXManager").GetComponent<SFXController>();
+        }
     }
     public void backToMainMenu()
     {
+        sfx.PlaySFX(SFXID.UIClick);
         SceneManager.LoadScene("MainMenu");
     }
 
     public void levelOne()
     {
+        sfx.PlaySFX(SFXID.UIClick);
         SceneManager.LoadScene("Level_1");
     }
 

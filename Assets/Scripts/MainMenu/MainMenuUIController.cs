@@ -14,6 +14,7 @@ public class MainMenuUIController : MonoBehaviour
     [SerializeField] private List<TextMeshProUGUI> instructionScripts;
     [SerializeField] private Canvas instructionsUI;
     [SerializeField] private Canvas settingsUI;
+    private SFXController sfx;
 
     private int currentInstuction;
 
@@ -21,29 +22,38 @@ public class MainMenuUIController : MonoBehaviour
     {
         currentInstuction = 0;
         instructionScripts[currentInstuction].enabled = true;
+        if (GameObject.Find("SFXManager") != null)
+        {
+            sfx = GameObject.Find("SFXManager").GetComponent<SFXController>();
+        }
     }
     public void changeToGameMenu()
     {
+        sfx.PlaySFX(SFXID.UIClick);
         SceneManager.LoadScene("GameMenu");
     }
 
     public void openInstructions()
     {
+        sfx.PlaySFX(SFXID.UIClick);
         instructionsUI.enabled = !instructionsUI.enabled;
         currentInstuction = 0;
     }
 
     public void openSettings()
     {
+        sfx.PlaySFX(SFXID.UIClick);
         settingsUI.enabled = !settingsUI.enabled;
     }
     public void quitGame()
     {
+        sfx.PlaySFX(SFXID.UIClick);
         Application.Quit();
     }
 
     public void changeInstuctionText()
     {
+        sfx.PlaySFX(SFXID.UIClick);
         currentInstuction++;
         if(currentInstuction == instructionScripts.Count)
         {

@@ -1,3 +1,8 @@
+//Michael Shular 101273089
+//BGMController
+//12/13/2021
+//Summary: Controls BGM tracks and audio
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

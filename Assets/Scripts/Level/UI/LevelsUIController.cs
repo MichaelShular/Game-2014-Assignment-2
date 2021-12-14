@@ -11,12 +11,23 @@ public class LevelsUIController : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] Canvas pauseCanvas;
+    private SFXController sfx;
+
+    private void Start()
+    {
+        if (GameObject.Find("SFXManager") != null)
+        {
+            sfx = GameObject.Find("SFXManager").GetComponent<SFXController>();
+        }
+    }
     public void loadGameMenu()
     {
+        sfx.PlaySFX(SFXID.UIClick);
         SceneManager.LoadScene("GameMenu");
     }
     public void UnpauseAndPauseGame()
     {
+        sfx.PlaySFX(SFXID.UIClick);
         if (Time.timeScale == 1)
         {
             Time.timeScale = 0;

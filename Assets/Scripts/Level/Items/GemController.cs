@@ -9,10 +9,15 @@ using UnityEngine;
 public class GemController : MonoBehaviour
 {
     private GameStateController gameController;
+    private SFXController sfx;
     // Start is called before the first frame update
     void Start()
     {
         gameController = GameObject.Find("GameController").GetComponent<GameStateController>();
+        if (GameObject.Find("SFXManager") != null)
+        {
+            sfx = GameObject.Find("SFXManager").GetComponent<SFXController>();
+        }
     }
 
     // Update is called once per frame
@@ -25,6 +30,7 @@ public class GemController : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            sfx.PlaySFX(SFXID.Stun);
             gameController.addedToTotalPoints(10);
             Destroy(this.gameObject);
         }

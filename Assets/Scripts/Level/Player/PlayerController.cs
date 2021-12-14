@@ -44,6 +44,8 @@ public class PlayerController : MonoBehaviour
     public float hurtTimer;
     [SerializeField] private float hurtForce;
     private bool takenDamage;
+    private SFXController sfx;
+
     void Start()
     {
         playerRigidbody = GetComponent<Rigidbody2D>();
@@ -52,6 +54,10 @@ public class PlayerController : MonoBehaviour
         isTouchingCrank = false;
         pushedCrank = false;
         takenDamage = false;
+        if (GameObject.Find("SFXManager") != null)
+        {
+            sfx = GameObject.Find("SFXManager").GetComponent<SFXController>();
+        }
     }
     void FixedUpdate()
     {
@@ -147,6 +153,7 @@ public class PlayerController : MonoBehaviour
     {
         if (gameController.getAmmo() > 0)
         {
+            sfx.PlaySFX(SFXID.Throw);
             gameController.incrementOrDecrementAmmo(-1);
             GameObject temp = Instantiate(playerBullet);
             temp.transform.position = transform.position;
@@ -156,7 +163,8 @@ public class PlayerController : MonoBehaviour
 
     public void jump()
     {
-        //jumpButton = 3;
+        sfx.PlaySFX(SFXID.PlayerJump);
+        jumpButton = 3;
     }
     public void growCrank()
     {
@@ -168,6 +176,7 @@ public class PlayerController : MonoBehaviour
 
     public void hurtState()
     {
+        sfx.PlaySFX(SFXID.Death);
         StartCoroutine(startHurtState());
     }
 
