@@ -1,7 +1,7 @@
 //Michael Shular 101273089
 //MainMenuUIController
-//12/12/2021
-//Summary: Controls menu buttons
+//12/13/2021
+//Summary: Controls menu buttons and the navigation of instuctions
 
 using System.Collections;
 using System.Collections.Generic;
@@ -13,6 +13,8 @@ public class MainMenuUIController : MonoBehaviour
 {
     [SerializeField] private List<TextMeshProUGUI> instructionScripts;
     [SerializeField] private Canvas instructionsUI;
+    [SerializeField] private Canvas settingsUI;
+
     private int currentInstuction;
 
     private void Start()
@@ -29,6 +31,11 @@ public class MainMenuUIController : MonoBehaviour
     {
         instructionsUI.enabled = !instructionsUI.enabled;
         currentInstuction = 0;
+    }
+
+    public void openSettings()
+    {
+        settingsUI.enabled = !settingsUI.enabled;
     }
     public void quitGame()
     {
@@ -53,6 +60,9 @@ public class MainMenuUIController : MonoBehaviour
             instructionScripts[currentInstuction].enabled = true;
             instructionScripts[currentInstuction - 1].enabled = false;
         }
-        
+    }
+    public void gameVolume(float size)
+    {
+        AudioListener.volume = size;
     }
 }

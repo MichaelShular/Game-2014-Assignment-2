@@ -40,6 +40,11 @@ public class GameStateController : MonoBehaviour
         amountOfLives.text = numberOfPlayerLifes.ToString();
         amountOfAmmo = totalPoints = 0;
         updateAmmoUI(amountOfAmmo.ToString());
+        //Getting BMGManager
+        if (GameObject.Find("BMGManager") != null)
+        {
+            GameObject.Find("BMGManager").GetComponent<BGMController>().PlayTrack(TrackID.Level1);
+        }
     }
 
     // Update is called once per frame
